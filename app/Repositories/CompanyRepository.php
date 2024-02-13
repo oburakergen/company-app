@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Http\Resources\CompanyCollection;
 use App\Http\Resources\CompanyResource;
+use Illuminate\Http\JsonResponse;
 use App\Models\Company;
 use App\Repositories\Interfaces\CompanyInterface;
 use Illuminate\Http\Exceptions\HttpResponseException;
@@ -13,45 +14,60 @@ class CompanyRepository implements CompanyInterface
 
     /**
      * @param array $credentials
-     * @return CompanyCollection
-     * @throws HttpResponseException
+     * @return JsonResponse
      */
-    public function create(array $credentials): CompanyCollection
+    public function create(array $credentials): JsonResponse
     {
         try {
-            $company = Company::create([
+            Company::create([
                 ...$credentials
             ]);
+            $company = Company::all();
         } catch (\Exception $exception) {
             throw new HttpResponseException(response()->error(['errors' => $exception->getMessage()], 404));
         }
 
-        return new CompanyCollection($company);
+        return response()->success(new CompanyCollection($company), 201);
     }
 
-    public function update(int $companyId, array $credentials): CompanyCollection
+    /**
+     * @param array $credentials
+     * @param int $companyId
+     * @return JsonResponse
+     */
+    public function update(int $companyId, array $credentials): JsonResponse
     {
         try {
-            $company = Company::where('id', $companyId)->update($credentials);
+           Company::where('id', $companyId)->update($credentials);
+           $company = Company::all();
         } catch (\Exception $exception) {
             throw new HttpResponseException(response()->error(['errors' => $exception->getMessage()], 404));
         }
 
-        return new CompanyCollection($company);
+        return response()->success(new CompanyCollection($company), 200);
     }
 
-    public function delete(int $companyId): CompanyCollection
+    /**
+     * @param int $companyId
+     * @return JsonResponse
+     */
+    public function delete(int $companyId): JsonResponse
     {
         try {
-            $company = Company::where('id', $companyId)->delete();
+            Company::where('id', $companyId)->delete();
+            $company = Company::all();
         } catch (\Exception $exception) {
             throw new HttpResponseException(response()->error(['errors' => $exception->getMessage()], 404));
         }
 
-        return new CompanyCollection($company);
+        return response()->success(new CompanyCollection($company), 204);
     }
 
-    public function show(int $companyId): CompanyResource
+    /**
+     * @param int $companyId
+     * @return JsonResponse
+     */
+    public function show(int $companyId): JsonResponse
     {
         try {
             $company = Company::where('id', $companyId)->firstOrFail();
@@ -59,6 +75,6 @@ class CompanyRepository implements CompanyInterface
             throw new HttpResponseException(response()->error(['errors' => $exception->getMessage()], 404));
         }
 
-        return new CompanyResource($company);
+        return response()->success(new CompanyResource($company), 200);
     }
 }

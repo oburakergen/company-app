@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Company;
 use App\Models\Employee;
 use App\Models\User;
@@ -18,13 +17,11 @@ class DatabaseSeeder extends Seeder
     {
          User::factory()->create([
              'name' => 'Test User',
-             'email' => 'admim@admin.com',
+             'email' => 'admin@admin.com',
          ]);
 
         try {
-            echo "Company table seeded";
             $this->company = (Company::factory(50)->create())->toArray();
-            $this->command->info('Company table seeded');
         } catch (\Exception $exception) {
             $this->command->warn($exception->getMessage());
         }

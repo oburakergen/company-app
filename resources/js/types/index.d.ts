@@ -14,6 +14,26 @@ export interface Company {
     slug: string;
 }
 
+export interface CompanyPagination {
+    data: Company[];
+    current_page: number;
+    from: number;
+    first_page_url: string;
+    next_page_url: string;
+    last_page_url: string;
+    last_page: number;
+    links: {
+        url: string | null;
+        label: string;
+        active: boolean;
+    }[];
+    path: string;
+    per_page: number;
+    prev_page_url: number | null;
+    to: number;
+    total: number;
+}
+
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
     auth: {
         user: User;

@@ -38,7 +38,6 @@ class SetupCommand extends Command
             $this->alert("Admin Info \n user: admin@admin.com \n pass: password");
             $this->info('Setup End');
         } catch (\Exception $exception) {
-            $this->table();
             $this->warn($exception->getMessage()."\nSetupCommand.php ". $this->verbosity. " line");
         }
     }

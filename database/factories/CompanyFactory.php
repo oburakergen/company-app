@@ -18,13 +18,13 @@ class CompanyFactory extends Factory
      */
     public function definition(): array
     {
-        $name = $this->faker->name();
+        $name = $this->faker->company();
 
         return [
             "name" => $name,
             "slug" => Str::slug($name),
-            "email" => $this->faker->email(),
-            "logo" => $this->faker->imageUrl(240,240,"logo"),
+            "email" => $this->faker->companyEmail(),
+            "logo" => $this->faker->imageUrl(240,240,'', true, $name),
             "website" => $this->faker->url(),
         ];
     }
