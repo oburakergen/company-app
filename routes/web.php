@@ -16,8 +16,8 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', \App\Http\Controllers\Pages\CompanyController::class)->name('home');
-
+Route::get('/', \App\Http\Controllers\Pages\HomeController::class)->name('home');
+Route::get('/company/{id}', \App\Http\Controllers\Pages\CompanyController::class)->name('company');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

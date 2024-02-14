@@ -5,11 +5,21 @@ export interface User {
     email_verified_at: string;
 }
 
+export interface Employee {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    created_at: string;
+    updated_at: string;
+    company?: Company;
+}
+
 export interface Company {
     id: number;
     name: string;
-    email: string;
-    logo: string;
+    email?: string;
+    logo?: string;
     website: string;
     slug: string;
 }

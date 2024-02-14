@@ -15,7 +15,7 @@ class EmployeeCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return $this->collection->map(function ($company) {
-            return new EmployeeCollection($company);
+            return new EmployeeResource($company);
         })->toArray();
     }
 }

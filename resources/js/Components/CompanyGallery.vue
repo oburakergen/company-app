@@ -1,0 +1,39 @@
+<script setup lang="ts">
+import {Card, CardContent, CardFooter} from "@/Components/ui/card";
+import {UseImage} from "@vueuse/components";
+import {CompanyPagination} from "@/types";
+
+defineProps<{
+    companies: CompanyPagination;
+}>();
+</script>
+
+<template>
+    <div class="flex flex-row flex-wrap gap-4 justify-center">
+        <Card v-for="company in companies.data" :key="company.id" class="hover:bg-accent">
+            <CardContent class="p-6 flex justify-center">
+                <div class="w-[200px]">
+                    <UseImage class="rounded-2xl object-cover shadow shadow-gray-300" :src="company.logo">
+                        <template #loading>
+                            Loading..
+                        </template>
+
+                        <template #error>
+                            Failed
+                        </template>
+                    </UseImage>
+                </div>
+            </CardContent>
+            <CardFooter class="relative flex-col align-center text-center">
+                <h1 class="truncate w-[200px] xs:w-full">{{company.name}}</h1>
+                <p class="truncate w-[200px] xs:w-full">{{company.email}}</p>
+                <a class="truncate w-[200px] xs:w-full" :href="company.website">{{ company.website }}</a>
+            </CardFooter>
+        </Card>
+
+    </div>
+</template>
+
+<style scoped>
+
+</style>
