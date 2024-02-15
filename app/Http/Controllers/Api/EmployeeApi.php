@@ -3,47 +3,47 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\CompanyRequest;
+use App\Http\Requests\EmployeeRequest;
+use App\Repositories\EmployeeRepository;
+use Illuminate\Http\JsonResponse;
 
 class EmployeeApi extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
+    public function __construct(protected EmployeeRepository $employeeRepository){}
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request): JsonResponse
     {
-        //
+        $credentials = $request->validated();
+
+        return $this->employeeRepository->create($credentials);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): JsonResponse
     {
-        //
+        return $this->employeeRepository->show($id);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CompanyRequest $request, int $id): JsonResponse
     {
-        //
+        $credentials = $request->validated();
+
+        return $this->employeeRepository->update($id, $credentials);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(int $id): JsonResponse
     {
-        //
+        return $this->employeeRepository->delete($id);
     }
 }

@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('companies', \App\Http\Controllers\Api\CompanyApi::class, ['except' => ['index']]);
+Route::apiResource('employees', \App\Http\Controllers\Api\EmployeeApi::class, ['except' => ['index']]);

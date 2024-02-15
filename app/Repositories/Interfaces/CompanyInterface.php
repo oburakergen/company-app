@@ -2,8 +2,6 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Http\Resources\CompanyCollection;
-use App\Http\Resources\CompanyResource;
 use Illuminate\Http\JsonResponse;
 
 interface CompanyInterface
