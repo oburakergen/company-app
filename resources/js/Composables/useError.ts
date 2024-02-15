@@ -1,4 +1,5 @@
-import {computed, Ref, ref} from "vue";
+import {computed, Ref, ref, watch} from "vue";
+import { toast } from 'vue3-toastify';
 
 interface Error {
     message: string;
@@ -16,6 +17,13 @@ export default function useError() {
     const setError = (data: Error) => {
         error.value = data;
     }
+
+    watch(getError, (value) => {
+        if (value.status) {
+            toast.error(value.message);
+            setError({message: '', status: false});
+        }
+    });
 
     return {
         getError,

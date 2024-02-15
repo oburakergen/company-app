@@ -7,7 +7,7 @@ import {
     PaginationListItem,
     PaginationNext,
     PaginationPrev
-} from "@/Components/ui/pagination";
+} from "@/Components/ui/pagination/index";
 import PaginationButton from "@/Components/ui/button/PaginationButton.vue";
 import {CompanyPagination} from "@/types";
 defineProps<{

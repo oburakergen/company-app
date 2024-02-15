@@ -2,8 +2,8 @@
 import { Head } from '@inertiajs/vue3';
 import {CompanyPagination} from "@/types";
 import GuestLayout from "@/Layouts/GuestLayout.vue";
-import CompanyGallery from "@/Components/CompanyGallery.vue";
-import PaginationSimple from "@/Components/PaginationSimple.vue";
+import CompanyGallery from "@/Components/gallery/CompanyGallery.vue";
+import PaginationSimple from "@/Components/ui/pagination/PaginationSimple.vue";
 
 defineProps<{
     companies: CompanyPagination;

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import {Company} from "@/types";
 import {Head} from "@inertiajs/vue3";
-import GuestLayout from "@/Layouts/GuestLayout.vue";
 import {Card, CardContent} from "@/Components/ui/card";
 import { useEmployeeState } from "@/Stores/employee";
 import {onMounted} from "vue";
 import {Button} from "@/Components/ui/button";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 
 const props = defineProps<{
     company: Company;
@@ -21,9 +21,16 @@ onMounted(() => {
 </script>
 
 <template>
-    <Head title="Home" />
-    <GuestLayout>
-        <div class="container mx-auto my-6 bg-transparent">
+    <Head :title="`Company - ${company.name}`" />
+    <AuthenticatedLayout>
+        <template #header>
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight flex flex-row items-center gap-4">
+                <span><img :src="company.logo" :alt="company.name" class="max-w-[40px]" /></span>
+                <span>{{ company.name }} Employees</span>
+            </h2>
+        </template>
+
+        <div class="container mx-auto py-6 bg-transparent">
            <div class="flex flex-wrap flex-col gap-3">
              <Card v-for="employee in getEmployees">
                <CardContent class="pt-6 flex gap-4 items justify-between">
@@ -41,7 +48,7 @@ onMounted(() => {
              </Card>
            </div>
         </div>
-    </GuestLayout>
+    </AuthenticatedLayout>
 </template>
 
 <style scoped>
