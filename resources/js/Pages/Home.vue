@@ -7,6 +7,7 @@ import PaginationSimple from "@/Components/ui/pagination/PaginationSimple.vue";
 
 defineProps<{
     companies: CompanyPagination;
+    status: boolean;
 }>();
 </script>
 
@@ -14,7 +15,7 @@ defineProps<{
   <Head title="Home" />
   <GuestLayout>
     <div class="container mx-auto my-6 bg-transparent">
-        <CompanyGallery :companies="companies" />
+        <CompanyGallery :companies="companies" :status="status" />
         <PaginationSimple :companies="companies" />
     </div>
   </GuestLayout>

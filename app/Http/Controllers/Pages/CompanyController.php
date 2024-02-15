@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Pages;
 use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
-use Inertia\Response;
 
 class CompanyController extends Controller
 {
@@ -15,16 +13,39 @@ class CompanyController extends Controller
     {
         $this->middleware(['auth', 'verified']);
     }
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request, int $id): Response
-    {
-        $company = Company::where('id', $id)->firstOrFail();
 
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        $companies = Company::paginate(15);
         return Inertia::render('Company/Home',[
-            'status' => Auth::check(),
-            'company' => $company,
+            'companies' => $companies,
         ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
     }
 }

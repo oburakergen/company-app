@@ -14,8 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', \App\Http\Controllers\Pages\HomeController::class)->name('home');
-Route::get('/company/{id}', \App\Http\Controllers\Pages\CompanyController::class)->name('company');
-Route::get('/dashboard',\App\Http\Controllers\DashboardController::class)->name('dashboard');
-
+Route::resource('/company', \App\Http\Controllers\Pages\CompanyController::class,
+    ['only' => ['index', 'create', 'show', 'edit']])
+    ->names(['index' => 'company', 'create' => 'company.create', 'show' => 'company.show', 'edit' => 'company.edit']);
+Route::resource('/employee', \App\Http\Controllers\Pages\EmployeeController::class,
+    ['only' => ['index', 'create', 'show', 'edit']])
+    ->names(['index' => 'company', 'create' => 'company.create', 'show' => 'company.show', 'edit' => 'company.edit']);
 
 require __DIR__.'/auth.php';
