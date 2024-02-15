@@ -15,6 +15,7 @@ export const useEmployeeState = createGlobalState(
               employees.value = data;
          }
 
+
          const fetchEmployees = async (id: number) => {
              await api.get(`/companies/${id}`)
                  .then(data => setEmployees(data.data.data.employees))
