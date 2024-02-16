@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class EmployeeRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class EmployeeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,19 @@ class EmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'firstName' => 'required|string|max:100',
+            'lastName' => 'required|string|max:100',
+            'company_id' => 'required|integer|exists:companies,id',
+            'email' => 'required|email|max:100',
+            'phone' => 'required|string|max:20',
         ];
+    }
+
+
+    protected function failedValidation(Validator $validator)
+    {
+        $errors = $validator->errors();
+
+        throw new HttpResponseException(response()->error(['errors' => $errors], 422));
     }
 }

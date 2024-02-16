@@ -24,7 +24,7 @@ class EmployeeApi extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         return $this->employeeRepository->show($id);
     }

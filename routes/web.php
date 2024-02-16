@@ -19,6 +19,6 @@ Route::resource('/company', \App\Http\Controllers\Pages\CompanyController::class
     ->names(['index' => 'company', 'create' => 'company.create', 'show' => 'company.show', 'edit' => 'company.edit']);
 Route::resource('/employee', \App\Http\Controllers\Pages\EmployeeController::class,
     ['only' => ['index', 'create', 'show', 'edit']])
-    ->names(['index' => 'company', 'create' => 'company.create', 'show' => 'company.show', 'edit' => 'company.edit']);
+    ->names(['index' => 'employee', 'create' => 'employee.create', 'show' => 'employee.show', 'edit' => 'employee.edit']);
 
 require __DIR__.'/auth.php';

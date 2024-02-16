@@ -40,9 +40,8 @@ class EmployeeRepository implements EmployeeInterface
     public function delete(int $employeeId): JsonResponse
     {
         try {
-            $employee = Employee::findById($employeeId);
-            dd($employee);
             Employee::where('id', $employeeId)->delete();
+            $employee = Employee::all();
         } catch (\Exception $exception) {
             throw new HttpResponseException(response()->error(['errors' => $exception->getMessage()], 404));
         }
@@ -53,7 +52,7 @@ class EmployeeRepository implements EmployeeInterface
     public function show(int $employeeId): JsonResponse
     {
         try {
-            $employee = Employee::where('id', $employeeId)->get();
+            $employee = Employee::where('id', $employeeId)->first();
         } catch (\Exception $exception) {
             throw new HttpResponseException(response()->error(['errors' => $exception->getMessage()], 404));
         }

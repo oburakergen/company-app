@@ -6,6 +6,7 @@ export interface User {
 }
 
 export interface Employee {
+    id: number;
     firstName: string;
     lastName: string;
     email: string;
@@ -13,6 +14,7 @@ export interface Employee {
     created_at: string;
     updated_at: string;
     company?: Company;
+    company_id?: number;
 }
 
 export interface Company {

@@ -10,4 +10,5 @@ interface CompanyInterface
     public function update(int $companyId, array $credentials): JsonResponse;
     public function delete(int $companyId): JsonResponse;
     public function show(int $companyId): JsonResponse;
+    public function index(): JsonResponse;
 }

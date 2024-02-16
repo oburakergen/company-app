@@ -16,7 +16,7 @@ defineProps<{
         <Card v-for="company in companies.data" :key="company.id" class="hover:bg-accent">
             <CardContent class="p-6 flex justify-center">
                 <div class="w-[200px]">
-                 <Link :href="status ? route('company', {id: company.id}) : route('login')">
+                 <Link :href="status ? route('company') : route('login')">
                    <UseImage class="rounded-2xl object-cover shadow shadow-gray-300" :src="company.logo" >
                      <template #loading>
                        Loading..
@@ -30,7 +30,8 @@ defineProps<{
                 </div>
             </CardContent>
             <CardFooter class="relative flex-col align-center text-center">
-              <h1 class="truncate w-[200px] xs:w-full"><Link :href="status ? route('company', {id: company.id}) : route('login')">{{company.name}}</Link></h1>
+              <h1 class="truncate w-[200px] xs:w-full">
+                <Link :href="status ? route('company', {id: company.id}) : route('login')">{{company.name}}</Link></h1>
               <p class="truncate w-[200px] xs:w-full"><Link :href="status ? route('company', {id: company.id}) : route('login')">{{company.email}}</Link></p>
               <a class="truncate w-[200px] xs:w-full" :href="company.website">{{ company.website }}</a>
             </CardFooter>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Inertia\Response;
 
 class CompanyController extends Controller
 {
@@ -17,7 +18,7 @@ class CompanyController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): Response
     {
         $companies = Company::paginate(15);
         return Inertia::render('Company/Home',[
@@ -30,22 +31,30 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Company/Form/Create', [
+            'title' => 'Create Company',
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(int $id): Response
     {
-        //
+        $company = Company::find($id);
+        return Inertia::render('Company/Show',[
+            'company' => $company,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(int $id): Response
     {
-        //
+        return Inertia::render('Company/Form/Update', [
+            'title' => 'Edit Company',
+            'companyId' => $id,
+        ]);
     }
 }

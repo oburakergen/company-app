@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyRequest;
-use App\Http\Resources\CompanyCollection;
-use App\Http\Resources\CompanyResource;
 use App\Repositories\CompanyRepository;
 use Illuminate\Http\JsonResponse;
 
@@ -15,6 +13,10 @@ class CompanyApi extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    public function index(): JsonResponse
+    {
+        return $this->companyRepository->index();
+    }
     public function store(CompanyRequest $request): JsonResponse
     {
         $credentials = $request->validated();
